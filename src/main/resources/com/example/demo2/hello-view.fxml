@@ -12,10 +12,11 @@
     <Label fx:id="welcomeText" />
     <Button onAction="#onHelloButtonClick" text="Hello!" />
    <Button mnemonicParsing="false" onAction="#onHideButtonClick" text="Add Rows" />
+   <Button mnemonicParsing="false" onAction="#onTestButtonClick" text="Test SQLite Connection" />
    <TableView fx:id="myTable" editable="true" prefHeight="200.0" prefWidth="200.0">
      <columns>
        <TableColumn id="nameColumn" fx:id="nameColumn" prefWidth="75.0" text="Name" />
-       <TableColumn id="surnamecolumn" fx:id="surnameColumn" prefWidth="75.0" text="Surname" />
+       <TableColumn id="surnameColumn" fx:id="surnameColumn" prefWidth="75.0" text="Surname" />
      </columns>
    </TableView>
 </VBox>
