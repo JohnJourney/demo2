@@ -7,8 +7,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class HelloController {
     @FXML
@@ -55,15 +56,33 @@ public class HelloController {
     public void onTestButtonClick(ActionEvent actionEvent) throws ClassNotFoundException, SQLException {
 
 
-
         sqlConnection sqlConnection = new sqlConnection();
-        ResultSet resSet = com.example.demo2.sqlConnection.qetConnection();
+        ArrayList listNames = com.example.demo2.sqlConnection.qetConnection();
 
-        while(resSet.next())
+        nameColumn = getTableColumnById(myTable, "nameColumn");
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        for (Object mapName : listNames)
         {
-            String name = resSet.getString("Name");
-            System.out.println(name);
+
+            //System.out.println(mapName);
+            String currentName = ((HashMap) mapName).get("name").toString();
+            System.out.println(currentName);
+
+            HelloApplication.Person person = new HelloApplication.Person(currentName, currentName);
+            myTable.getItems().add(person);
+
         }
+
+//        for (listNames: String;)
+//        {
+//            String name = resSet.getString("Name");
+//            System.out.println(name);
+//
+//            HelloApplication.Person person = new HelloApplication.Person(name, name);
+//            myTable.getItems().add(person);
+//
+//        }
 
     }
 
