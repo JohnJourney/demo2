@@ -18,19 +18,19 @@ public class HelloApplication extends Application {
     }
 
     public static class Person {
-        private String name;
-        private String surname;
+        private Object name;
+        private Object surname;
 
-    public Person(String name, String surname) {
+    public Person(Object name, Object surname) {
             this.name = name;
             this.surname = surname;
         }
 
-        public String getName() {
+        public Object getName() {
             return name;
         }
 
-        public String getSurname() {
+        public Object getSurname() {
             return surname;
         }
     }
