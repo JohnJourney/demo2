@@ -20,7 +20,7 @@ public class HelloController {
     private TableColumn nameColumn;
     @FXML
     private TableColumn surnameColumn;
-
+    private TableColumn phoneColumn;
     @FXML
     protected void onHelloButtonClick() {
         welcomeText.setText("Welcome to JavaFX Application!");
@@ -55,18 +55,25 @@ public class HelloController {
 
     public void onTestButtonClick(ActionEvent actionEvent) throws ClassNotFoundException, SQLException {
 
-        sqlConnection sqlConnection = new sqlConnection();
-        ArrayList listNames = com.example.demo2.sqlConnection.qetConnection();
+        // DataFromSQL sqlConnection = new DataFromSQL();
+        ArrayList listNames = com.example.demo2.DataFromSQL.qetConnection();
 
         nameColumn = getTableColumnById(myTable, "nameColumn");
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
+//        surnameColumn = getTableColumnById(myTable, "surnameColumn");
+//        surnameColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
+
+        phoneColumn = getTableColumnById(myTable, "phoneColumn");
+        phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
+
         for (Object mapName : listNames) {
 
             Object currentName = ((HashMap) mapName).get("name");
+            Object currentPhone = ((HashMap) mapName).get("phone");
             //System.out.println(currentName);
 
-            HelloApplication.Person person = new HelloApplication.Person(currentName, currentName);
+            HelloApplication.Person person = new HelloApplication.Person(currentName, "" , currentPhone);
             myTable.getItems().add(person);
 
         }

@@ -4,19 +4,20 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.HelloController">
+<VBox alignment="CENTER" spacing="10.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.HelloController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
 
     <Label fx:id="welcomeText" />
     <Button onAction="#onHelloButtonClick" text="Hello!" />
-   <Button mnemonicParsing="false" onAction="#onHideButtonClick" text="Add Rows" />
-   <Button mnemonicParsing="false" onAction="#onTestButtonClick" text="Test SQLite Connection" />
-   <TableView fx:id="myTable" editable="true" prefHeight="200.0" prefWidth="200.0">
-     <columns>
-       <TableColumn id="nameColumn" fx:id="nameColumn" prefWidth="75.0" text="Name" />
-       <TableColumn id="surnameColumn" fx:id="surnameColumn" prefWidth="75.0" text="Surname" />
-     </columns>
-   </TableView>
+    <Button mnemonicParsing="false" onAction="#onHideButtonClick" text="Add Rows" />
+    <Button mnemonicParsing="false" onAction="#onTestButtonClick" text="Test SQLite Connection" />
+    <TableView fx:id="myTable" editable="true" prefHeight="200.0" prefWidth="400.0">
+        <columns>
+            <TableColumn id="nameColumn" fx:id="nameColumn" prefWidth="75.0" text="Name" />
+            <TableColumn id="surnameColumn" fx:id="surnameColumn" prefWidth="100.0" text="Surname" />
+            <TableColumn id="phoneColumn" fx:id="phoneColumn" prefWidth="100.0" text="Phone" />
+        </columns>
+    </TableView>
 </VBox>
