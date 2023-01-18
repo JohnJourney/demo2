@@ -4,22 +4,20 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-//public class sqlConnection {
 public class DataFromSQL {
     public static Connection Connection;
     public static Statement Statement;
     public static ResultSet ResultSet;
     public static ArrayList listNames;
 
-    //public static HashMap mapNames;
-
-    public static ArrayList<HashMap> qetConnection() throws ClassNotFoundException, SQLException {
+    public static ArrayList<HashMap> qetDataFromSQLDataBase() throws ClassNotFoundException, SQLException {
 
         try {
             Connection = null;
             Class.forName("org.sqlite.JDBC");
 
-            Connection = DriverManager.getConnection("JDBC:sqlite:base 1 test.db");
+            String dbUrl = "JDBC:sqlite:C:\\Users\\user\\Documents\\SQLite Bases\\Base 1 test\\JavaBase.db";
+            Connection = DriverManager.getConnection(dbUrl);
             System.out.println("Connection sucessful!" + "\n");
 
             Statement = Connection.createStatement();
@@ -36,12 +34,13 @@ public class DataFromSQL {
 
             }
 
-        } catch (SQLException ex) {
-            System.out.println("Error");
         }
-//        catch (SQLException s_ex) {
-//                System.out.println(s_ex.getMessage());
-//                }
+//        catch (SQLException ex) {
+//            System.out.println("Error");
+//        }
+        catch (SQLException s_ex) {
+                System.out.println(s_ex.getMessage());
+                }
         finally {
             try {
                 Connection.close();

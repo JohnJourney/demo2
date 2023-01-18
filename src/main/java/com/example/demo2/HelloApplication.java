@@ -22,7 +22,7 @@ public class HelloApplication extends Application {
         private Object surname;
         private Object phone;
 
-    public Person(Object name, Object surname, Object phone) {
+        public Person(Object name, Object surname, Object phone) {
             this.name = name;
             this.surname = surname;
             this.phone = phone;
@@ -31,9 +31,16 @@ public class HelloApplication extends Application {
         public Object getName() {
             return name;
         }
+        public Object getSurname() {
+            return surname;
+        }
         public Object getPhone() {
             return phone;
         }
+        public void setName(String newName) {
+            this.name = newName;
+        }
+
     }
 
     public static void main(String[] args) {
