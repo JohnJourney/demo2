@@ -2,6 +2,7 @@ package com.example.demo2;
 
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -26,6 +27,8 @@ public class HelloController {
     private TableColumn phoneColumn;
     @FXML
     private Person Person;
+
+    private EventHandler Event;
 
 //    protected void onHelloButtonClick() {
 //        welcomeText.setText("Welcome to JavaFX Application!");
@@ -57,7 +60,7 @@ public class HelloController {
                 = (TableColumn<Person, String> param) -> new EditingCell();
 
         nameColumn.setCellFactory(cellFactory);
-        
+
     }
 
     public void onTestButtonClick(ActionEvent actionEvent) throws ClassNotFoundException, SQLException {
@@ -85,15 +88,11 @@ public class HelloController {
 
         nameColumn.setCellFactory(cellFactory);
 
-//        nameColumn.setOnEditCommit(
-//                (TableColumn.CellEditEvent<Person, String> t) -> {
-//                    ((Person) myTable.getItems().get(t.getTablePosition().getRow())).setName(t.getNewValue());
-//
-//                });
-
-
-
-    }
+        //nameColumn.setOnEditCommit(EventHandler<TableCell> t) ;
+        nameColumn.setOnEditCommit(
+                (EventHandler<TableColumn.CellEditEvent<HelloApplication.Person, String>>) t -> ((Person) t.getTableView().getItems().get(
+                        t.getTablePosition().getRow())
+                ).setName(t.getNewValue()));
 
 //    public void nameOnEditStart(TableColumn.CellEditEvent<Person, String> EdditableCell) {
 //
@@ -122,7 +121,7 @@ public class HelloController {
 //
 //        //personSelected.setName((String) EdditableCell.getNewValue());
 //
-//    }
+    }
 
     class EditingCell extends TableCell<Person, String> {
 
