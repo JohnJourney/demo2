@@ -53,9 +53,11 @@ public class HelloController {
         Person person2 = new Person("Анатолий", "Савин", "");
         myTable.getItems().add(person2);
 
-        myTable.setEditable(true);
-        surnameColumn.setEditable(true);
+        Callback<TableColumn<Person, String>, TableCell<Person, String>> cellFactory
+                = (TableColumn<Person, String> param) -> new EditingCell();
 
+        nameColumn.setCellFactory(cellFactory);
+        
     }
 
     public void onTestButtonClick(ActionEvent actionEvent) throws ClassNotFoundException, SQLException {
@@ -63,12 +65,7 @@ public class HelloController {
         ArrayList listNames = DataFromSQL.qetDataFromSQLDataBase();
 
         nameColumn = getTableColumnById(myTable, "nameColumn");
-//        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-
-//        Callback<TableColumn<Person, String>, TableCell<Person, String>> cellFactory
-//                = (TableColumn<Person, String> param) -> new EditingCell();
-
-
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
         phoneColumn = getTableColumnById(myTable, "phoneColumn");
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
@@ -83,12 +80,10 @@ public class HelloController {
 
         }
 
-
-        myTable.setEditable(true);
         Callback<TableColumn<Person, String>, TableCell<Person, String>> cellFactory
                 = (TableColumn<Person, String> param) -> new EditingCell();
 
-        nameColumn.setCellValueFactory(cellFactory);
+        nameColumn.setCellFactory(cellFactory);
 
 //        nameColumn.setOnEditCommit(
 //                (TableColumn.CellEditEvent<Person, String> t) -> {
