@@ -13,12 +13,12 @@
     </padding>
 
     <Label fx:id="welcomeText" />
-    <Button text="Hello!" />
     <Button mnemonicParsing="false" onAction="#onHideButtonClick" text="Add Rows" />
     <Button mnemonicParsing="false" onAction="#onTestButtonClick" text="Test SQLite Connection" />
     <TableView fx:id="myTable" editable="true" prefHeight="200.0" prefWidth="400.0">
         <columns>
-            <TableColumn id="nameColumn" fx:id="nameColumn" onEditCommit="#changeName" onEditStart="#changeNameEditStart" prefWidth="75.0" text="Name" />
+            <TableColumn id="nameColumn" fx:id="nameColumn" editable="true" onEditCommit="#nameOnEditCommit" onEditStart="#nameOnEditStart" prefWidth="75.0" text="Name" />
+            
             <TableColumn id="surnameColumn" fx:id="surnameColumn" prefWidth="100.0" text="Surname" />
             <TableColumn id="phoneColumn" fx:id="phoneColumn" prefWidth="100.0" text="Phone" />
         </columns>
