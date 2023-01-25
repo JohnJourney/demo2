@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox alignment="CENTER" spacing="10.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.HelloController">
@@ -13,8 +14,10 @@
     </padding>
 
     <Label fx:id="welcomeText" />
-    <Button mnemonicParsing="false" onAction="#onHideButtonClick" text="Add Rows" />
-    <Button mnemonicParsing="false" onAction="#onTestButtonClick" text="Test SQLite Connection" />
+   <Label text="Way to database" />
+   <TextField id="textFieldWayToBase" fx:id="textFieldWayToBase" text="C:\Users\user\Documents\SQLite Bases\Base 1 test\JavaBase.db" />
+    <Button mnemonicParsing="false" onAction="#buttonAddTestRows" text="Add test rows to the form" />
+    <Button mnemonicParsing="false" onAction="#buttonGetDataFromSQL" text="Get data from base" />
     <TableView fx:id="myTable" editable="true" prefHeight="200.0" prefWidth="400.0">
         <columns>
             <TableColumn id="nameColumn" fx:id="nameColumn" editable="true" prefWidth="75.0" text="Name" />

@@ -1,6 +1,5 @@
 package com.example.demo2;
 
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -11,6 +10,7 @@ import javafx.util.Callback;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import static com.example.demo2.HelloApplication.Person;
 
@@ -26,11 +26,14 @@ public class HelloController {
     @FXML
     private TableColumn phoneColumn;
     @FXML
+    private TextField textFieldWayToBase;
+
+    @FXML
     private Person Person;
 
     private EventHandler Event;
 
-//    protected void onHelloButtonClick() {
+//    protected void buttonHello() {
 //        welcomeText.setText("Welcome to JavaFX Application!");
 //    }
 
@@ -41,8 +44,7 @@ public class HelloController {
         return null;
     }
 
-    public void onHideButtonClick() {
-        welcomeText.setText("");
+    public void buttonAddTestRows() {
 
         nameColumn = getTableColumnById(myTable, "nameColumn");
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -56,22 +58,21 @@ public class HelloController {
         Person person2 = new Person("Анатолий", "Савин", "");
         myTable.getItems().add(person2);
 
-        Callback<TableColumn<Person, String>, TableCell<Person, String>> cellFactory
-                = (TableColumn<Person, String> param) -> new EditingCell();
-
-        nameColumn.setCellFactory(cellFactory);
-
     }
 
-    public void onTestButtonClick(ActionEvent actionEvent) throws ClassNotFoundException, SQLException {
+    public void buttonGetDataFromSQL(ActionEvent actionEvent) throws ClassNotFoundException, SQLException {
 
-        ArrayList listNames = DataFromSQL.qetDataFromSQLDataBase();
+        String waytoDataBase = textFieldWayToBase.getText();
+
+        ArrayList listNames = DataFromSQL.qetDataFromSQLDataBase(waytoDataBase);
 
         nameColumn = getTableColumnById(myTable, "nameColumn");
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
         phoneColumn = getTableColumnById(myTable, "phoneColumn");
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
+
+        Iterator<Integer> iteratorListNames = listNames.iterator();
 
         for (Object mapName : listNames) {
 
@@ -84,108 +85,37 @@ public class HelloController {
         }
 
         Callback<TableColumn<Person, String>, TableCell<Person, String>> cellFactory
-                = (TableColumn<Person, String> param) -> new EditingCell();
+                = (TableColumn<Person, String> param) -> new EditableCell();
 
         nameColumn.setCellFactory(cellFactory);
 
-        //nameColumn.setOnEditCommit(EventHandler<TableCell> t) ;
         nameColumn.setOnEditCommit(
                 (EventHandler<TableColumn.CellEditEvent<HelloApplication.Person, String>>) t -> ((Person) t.getTableView().getItems().get(
                         t.getTablePosition().getRow())
                 ).setName(t.getNewValue()));
 
-//    public void nameOnEditStart(TableColumn.CellEditEvent<Person, String> EdditableCell) {
-//
-////        nameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-////
-////
-////
-////
-////     Person personSelected = (Person) myTable.getSelectionModel().getSelectedItem();
-//////
-////      personSelected.setName("WARMER");
-//////        //personSelected.setName((String) EdditableCell.getNewValue());
-//////        nameColumn.setText("test");
-//
-//    }
-
-//    //public void nameOnEditCommit(TableColumn.CellEditEvent<Person, String> CellEditEvent) {
-//    public void nameOnEditCommit(TableColumn.CellEditEvent<Person, String> EdditableCell) {
-//
-//        Person personSelected = (Person) myTable.getSelectionModel().getSelectedItem();
-//
-//        personSelected.setName("GOT IT");
-//
-//
-//
-//
-//        //personSelected.setName((String) EdditableCell.getNewValue());
-//
-    }
-
-    class EditingCell extends TableCell<Person, String> {
-
-        private TextField textField;
-
-        private EditingCell() {
-        }
-
-        @Override
-        public void startEdit() {
-            if (!isEmpty()) {
-                super.startEdit();
-                createTextField();
-                setText(null);
-                setGraphic(textField);
-                textField.selectAll();
-            }
-        }
-
-        @Override
-        public void cancelEdit() {
-            super.cancelEdit();
-
-            setText((String) getItem());
-            setGraphic(null);
-        }
-
-        @Override
-        public void updateItem(String item, boolean empty) {
-            super.updateItem(item, empty);
-
-            if (empty) {
-                setText(item);
-                setGraphic(null);
-            } else {
-                if (isEditing()) {
-                    if (textField != null) {
-                        textField.setText(getString());
-//                        setGraphic(null);
-                    }
-                    setText(null);
-                    setGraphic(textField);
-                } else {
-                    setText(getString());
-                    setGraphic(null);
-                }
-            }
-        }
-
-        private void createTextField() {
-            textField = new TextField(getString());
-            textField.setMinWidth(this.getWidth() - this.getGraphicTextGap() * 2);
-            textField.setOnAction((e) -> commitEdit(textField.getText()));
-            textField.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-                if (!newValue) {
-                    System.out.println("Commiting " + textField.getText());
-                    commitEdit(textField.getText());
-                }
-            });
-        }
-
-        private String getString() {
-            return getItem() == null ? "" : getItem();
-        }
     }
 
 }
+        /*public void nameOnEditStart (TableColumn.CellEditEvent < Person, String > EdditableCell){
+
+            nameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+
+            Person personSelected = (Person) myTable.getSelectionModel().getSelectedItem();
+
+            personSelected.setName("WARMER");
+            //personSelected.setName((String) EdditableCell.getNewValue());
+            nameColumn.setText("test");
+
+        }*/
+
+   /* public void nameOnEditCommit(TableColumn.CellEditEvent<Person, String> CellEditEvent) {
+    public void nameOnEditCommit(TableColumn.CellEditEvent<Person, String> EdditableCell) {
+
+        Person personSelected = (Person) myTable.getSelectionModel().getSelectedItem();
+
+        personSelected.setName("GOT IT");
+
+        //personSelected.setName((String) EdditableCell.getNewValue());
+
+    }*/

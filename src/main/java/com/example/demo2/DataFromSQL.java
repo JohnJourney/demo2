@@ -10,13 +10,15 @@ public class DataFromSQL {
     public static ResultSet ResultSet;
     public static ArrayList listNames;
 
-    public static ArrayList<HashMap> qetDataFromSQLDataBase() throws ClassNotFoundException, SQLException {
+    public static ArrayList<HashMap> qetDataFromSQLDataBase(String waytoDataBase) throws ClassNotFoundException, SQLException {
 
         try {
             Connection = null;
             Class.forName("org.sqlite.JDBC");
 
-            String dbUrl = "JDBC:sqlite:C:\\Users\\user\\Documents\\SQLite Bases\\Base 1 test\\JavaBase.db";
+            String dbUrl = "JDBC:sqlite:" + waytoDataBase;
+
+            //String dbUrl = "JDBC:sqlite:C:\\Users\\user\\Documents\\SQLite Bases\\Base 1 test\\JavaBase.db";
             Connection = DriverManager.getConnection(dbUrl);
             System.out.println("Connection sucessful!" + "\n");
 
@@ -51,4 +53,3 @@ public class DataFromSQL {
         return listNames;
     }
 }
-
