@@ -59,10 +59,9 @@ public class HelloController {
         myTable.getItems().clear();
 
         String waytoDataBase = textFieldWayToBase.getText();
+        String nameOfTable = "holding_event";
 
-       // ArrayList listNames = DataFromSQL.qetDataFromSQLDataBase(waytoDataBase);
-
-        HashMap mapColumnNames_and_listResultSet = DataFromSQL.qetDataFromSQLDataBase(waytoDataBase);
+        HashMap mapColumnNames_and_listResultSet = DataFromSQL.qetDataFromSQLDataBase(waytoDataBase, nameOfTable);
 
         // todo >>> how to compare sql data and tablewiew using column names from sql and fx column id ?
 
@@ -70,8 +69,6 @@ public class HelloController {
         var namesIterator = columnNames.iterator();
 
         ArrayList listPersons = (ArrayList) mapColumnNames_and_listResultSet.get("dataList");
-
-
 
         for (Object mapName : listPersons) {
 
@@ -83,9 +80,7 @@ public class HelloController {
 
         }
 
-
-
-
+        // var iteratorListNames = listNames.iterator();
         while (namesIterator.hasNext()) {
 
             String columnName = (String) namesIterator.next();
@@ -93,44 +88,12 @@ public class HelloController {
             TableColumn currentColumn = getTableColumnById(myTable, columnName);
             currentColumn.setCellValueFactory(new PropertyValueFactory<>(columnName));
 
-
-//            Callback<TableColumn<Person, String>, TableCell<Person, String>> cellFactory
-//                    = (TableColumn<Person, String> param) -> new EditableCell();
-//
-//            currentColumn.setCellFactory(cellFactory);
-//
-//            currentColumn.setOnEditCommit(
-//                    (EventHandler<TableColumn.CellEditEvent<Person, String>>) t -> ((Person) t.getTableView().getItems().get(
-//                            t.getTablePosition().getRow())
-//                    ).setName(t.getNewValue()));
-
-
-
         }
-//        nameColumn = getTableColumnById(myTable, "nameColumn");
-//        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-//
-//        phoneColumn = getTableColumnById(myTable, "phoneColumn");
-//        phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
-//
-        // var iteratorListNames = listNames.iterator();
 
-//        ArrayList listPersons = (ArrayList) mapColumnNames_and_listResultSet.get("dataList");
-//
-//        for (Object mapName : listPersons) {
-//
-//            Object currentName = ((HashMap) mapName).get("Name");
-//            Object currentPhone = ((HashMap) mapName).get("Phone");
-//
-//            Person person = new Person(currentName, "", currentPhone);
-//            myTable.getItems().add(person);
-//
-//        }
-
-        Callback<TableColumn<Person, String>, TableCell<Person, String>> cellFactory
+        Callback<TableColumn<Person, String>, TableCell<Person, String>> nameCellFactory
                 = (TableColumn<Person, String> param) -> new EditableCell();
 
-        nameColumn.setCellFactory(cellFactory);
+        nameColumn.setCellFactory(nameCellFactory);
 
         nameColumn.setOnEditCommit(
                 (EventHandler<TableColumn.CellEditEvent<Person, String>>) t -> ((Person) t.getTableView().getItems().get(
@@ -138,16 +101,13 @@ public class HelloController {
                 ).setName(t.getNewValue()));
 
 
-        Callback<TableColumn<Person, String>, TableCell<Person, String>> cellFactory1
+        Callback<TableColumn<Person, String>, TableCell<Person, String>> surnameCellFactory
                 = (TableColumn<Person, String> param) -> new EditableCell();
-
-        phoneColumn.setCellFactory(cellFactory1);
-
+        phoneColumn.setCellFactory(surnameCellFactory);
         phoneColumn.setOnEditCommit(
                 (EventHandler<TableColumn.CellEditEvent<Person, String>>) t -> ((Person) t.getTableView().getItems().get(
                         t.getTablePosition().getRow())
                 ).setPhone(t.getNewValue()));
-
 
 
    }

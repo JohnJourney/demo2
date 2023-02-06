@@ -13,7 +13,7 @@ public class DataFromSQL {
     public static ArrayList listColumnNames;
 
     //public static ArrayList<HashMap> qetDataFromSQLDataBase(String waytoDataBase) throws ClassNotFoundException, SQLException {
-    public static HashMap<String, ArrayList> qetDataFromSQLDataBase(String waytoDataBase) throws ClassNotFoundException, SQLException {
+    public static HashMap<String, ArrayList> qetDataFromSQLDataBase(String waytoDataBase, String nameOfTable) throws ClassNotFoundException, SQLException {
 
         //todo >>> add table name as parameter
         // attention! ResultSet.getString - need to use appropriate get...[type].... according to type from sql
@@ -28,8 +28,8 @@ public class DataFromSQL {
             System.out.println("Connection sucessful!" + "\n");
 
             Statement = Connection.createStatement();
-            ResultSet = Statement.executeQuery("select * from people");
-            //ResultSet = Statement.executeQuery("select * from partners");
+            String queryText = "select * from " + nameOfTable;
+            ResultSet = Statement.executeQuery(queryText);
 
             listData = new ArrayList<HashMap>();
 
@@ -65,11 +65,10 @@ public class DataFromSQL {
 
         }
         catch (SQLException ex) {
+            //System.out.println(ex.getMessage());
             ex.printStackTrace();
         }
-//        catch (SQLException s_ex) {
-//            System.out.println(s_ex.getMessage());
-//        }
+
         finally {
             try {
 
@@ -81,7 +80,6 @@ public class DataFromSQL {
             System.out.println("\n" + "End");
         }
 
-        // return listNames;
         var mapColumnNames_and_listResultSet = new HashMap<String, ArrayList>();
 
         mapColumnNames_and_listResultSet.put("columnNames", listColumnNames);
