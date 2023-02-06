@@ -23,6 +23,7 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
 
         stage.show();
+
     }
 
     public static class Person {
@@ -49,6 +50,16 @@ public class HelloApplication extends Application {
             this.name = newName;
         }
 
+
+
+        public void setSurname(String newSurname) {
+            this.surname = newSurname;
+        }
+
+
+        public void setPhone(String newPhone) {
+            this.phone = newPhone;
+        }
 
     }
 

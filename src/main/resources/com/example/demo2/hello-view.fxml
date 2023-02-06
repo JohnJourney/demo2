@@ -37,10 +37,10 @@
     <Label fx:id="welcomeText" />
     <TableView fx:id="myTable" editable="true" prefHeight="200.0" prefWidth="400.0">
         <columns>
-            <TableColumn id="nameColumn" fx:id="nameColumn" editable="true" prefWidth="75.0" text="Name" />
+            <TableColumn id="Name" fx:id="nameColumn" editable="true" prefWidth="75.0" text="Name" />
             
-            <TableColumn id="surnameColumn" fx:id="surnameColumn" prefWidth="100.0" text="Surname" />
-            <TableColumn id="phoneColumn" fx:id="phoneColumn" prefWidth="100.0" text="Phone" />
+            <TableColumn id="Surname" fx:id="surnameColumn" prefWidth="100.0" text="Surname" />
+            <TableColumn id="Phone" fx:id="phoneColumn" prefWidth="100.0" text="Phone" />
         </columns>
     </TableView>
 </VBox>
